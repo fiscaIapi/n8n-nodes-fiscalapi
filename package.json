@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-fiscalapi",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n node for FiscalAPI (Brazil): state registrations (IE), CNPJ, tax clearance certificates, NF-e XML, SIGEF, CNIR and rural producer profile.",
 	"license": "MIT",
 	"homepage": "https://github.com/fiscaIapi/n8n-nodes-fiscalapi",
@@ -53,5 +53,8 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
