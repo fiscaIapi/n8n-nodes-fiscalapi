@@ -57,7 +57,7 @@ export class FiscalApi implements INodeType {
 						description: 'Company registration data by CNPJ',
 					},
 					{
-						name: 'NF-e',
+						name: 'NFe',
 						value: 'nfe',
 						description: 'Electronic invoice (NF-e) XML by access key',
 					},

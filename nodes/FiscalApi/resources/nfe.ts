@@ -15,7 +15,7 @@ export const nfeDescription: INodeProperties[] = [
 			{
 				name: 'Get XML',
 				value: 'getXml',
-				action: 'Get the XML of an NF-e by access key',
+				action: 'Get the XML of an invoice by access key',
 				description:
 					'Get the full signed XML of one NF-e using the A1 certificate of a party to the invoice',
 				routing: {

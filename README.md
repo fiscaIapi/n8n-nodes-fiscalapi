@@ -31,7 +31,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 | Certificate | Get CNDT (Labor Debts) | `GET /api/consultar-cndt` |
 | Certificate | Get FGTS CRF | `GET /api/consultar-crf-fgts` |
 | Certificate | Get All Certificates | `GET /api/certidoes-todas` |
-| NF-e | Get XML | `POST /api/consultar-nfe-xml` |
+| NFe | Get XML | `POST /api/consultar-nfe-xml` |
 | Rural Property | Get SIGEF Parcels | `GET /api/consultar-sigef` |
 | Rural Property | Get SIGEF Parcel (by UUID) | `GET /api/consultar-sigef-parcela` |
 | Rural Property | Get CNIR Properties | `GET /api/consultar-cnir` |

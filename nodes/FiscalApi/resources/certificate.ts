@@ -3,7 +3,7 @@ import { documentFields, stateField } from '../shared/descriptions';
 import { sendDocument } from '../shared/transport';
 
 const resource = ['certificate'];
-const allOperations = ['getAll', 'getCndt', 'getFederalCnd', 'getFgtsCrf', 'getStateCnd', 'getStateCndAllStates'];
+const allOperations = ['getAllCertificates', 'getCndt', 'getFederalCnd', 'getFgtsCrf', 'getStateCnd', 'getStateCndAllStates'];
 
 export const certificateDescription: INodeProperties[] = [
 	{
@@ -15,7 +15,7 @@ export const certificateDescription: INodeProperties[] = [
 		options: [
 			{
 				name: 'Get All Certificates',
-				value: 'getAll',
+				value: 'getAllCertificates',
 				action: 'Get all certificates',
 				description: 'Get state CNDs, CNDT, federal CND and FGTS CRF in one call',
 				routing: {
@@ -96,7 +96,7 @@ export const certificateDescription: INodeProperties[] = [
 		type: 'boolean',
 		default: false,
 		description: 'Whether to return only the federal certificates',
-		displayOptions: { show: { resource, operation: ['getAll'] } },
+		displayOptions: { show: { resource, operation: ['getAllCertificates'] } },
 		routing: {
 			send: { type: 'query', property: 'skip_estaduais' },
 		},
