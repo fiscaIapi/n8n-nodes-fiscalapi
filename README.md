@@ -49,7 +49,7 @@ Testing the credential calls a free endpoint and does not consume credits.
 
 ## Compatibility
 
-Built with `@n8n/node-cli` and n8n nodes API version 1. Tested target: n8n 1.x and later. No runtime dependencies.
+Built with `@n8n/node-cli` and n8n nodes API version 1. Targets n8n 1.x and later. No runtime dependencies.
 
 ## Usage
 
@@ -67,14 +67,14 @@ Built with `@n8n/node-cli` and n8n nodes API version 1. Tested target: n8n 1.x a
 1. *Webhook* receives a CNPJ.
 2. *FiscalAPI* → Company → Get.
 3. *FiscalAPI* → Certificate → Get All Certificates.
-4. *IF* `result.status` of every certificate is `negativa` → continue the payment flow; otherwise notify the finance team.
+4. *IF* every certificate (`certidoes_federais[].result.status` and `cnd_estaduais.results[].result.status`) is `negativa`, `positiva_com_efeitos_de_negativa` or (for state CNDs) `nao_contribuinte` → continue the payment flow; otherwise notify the finance team.
 
 **Download NF-e XML files from a spreadsheet of access keys**
 
 1. *Read/Write Files from Disk* reads `certificate.pfx` into the `data` binary property.
 2. *Google Sheets* (or *Spreadsheet File*) returns one item per access key.
 3. *Merge* combines the certificate with each item.
-4. *FiscalAPI* → NF-e → Get XML, Access Key `{{ $json.chave }}`.
+4. *FiscalAPI* → NFe → Get XML, Access Key `{{ $json.chave }}`.
 5. *Convert to File* saves `{{ $json.resultados[0].xml }}` as `{{ $json.resultados[0].chave }}.xml`.
 
 **Find the state registrations of a rural producer**
