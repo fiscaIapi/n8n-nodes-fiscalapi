@@ -1,0 +1,54 @@
+# Publishes this n8n community node package to npm on every version tag push,
+# with an npm provenance statement (required by n8n for verified community
+# nodes since May 1, 2026). Based on the official n8n-nodes-starter workflow.
+#
+# Requires @n8n/node-cli >= 0.23.0 (devDependency), which passes the
+# provenance flag when `npm run release` runs in CI.
+#
+# ONE-TIME SETUP
+# Option A (recommended): npm Trusted Publishing (OIDC, no secrets)
+#   npmjs.com → package n8n-nodes-fiscalapi → Settings → Trusted Publishers →
+#   GitHub Actions: owner "fiscaIapi", repository "n8n-nodes-fiscalapi",
+#   workflow "publish.yml". Leave NPM_TOKEN unset.
+#   Note: the package must exist on npm before a Trusted Publisher can be
+#   added, so the very first release may need Option B.
+# Option B: granular npm access token stored as the NPM_TOKEN Actions secret.
+#
+# TAGS: triggers on "*.*.*" (e.g. 0.1.0), same as the starter.
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Required to mint an OIDC token for the npm provenance attestation.
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi
+
+      - name: Release
+        # Lint and build run as part of the release process.
+        run: |
+          [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm run release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
